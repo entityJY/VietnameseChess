@@ -1,8 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://363xjpaqegg7"]
+[gd_scene load_steps=3 format=3 uid="uid://363xjpaqegg7"]
 
 [ext_resource type="PackedScene" uid="uid://culgh4iqhhod5" path="res://piece/piece.tscn" id="1_5c38k"]
+[ext_resource type="Texture2D" uid="uid://6nus34rkcqud" path="res://board/sprites/board.png" id="2_k4dee"]
 
 [node name="Base" type="Node2D"]
 
-[node name="Piece" parent="." instance=ExtResource("1_5c38k")]
-position = Vector2(142, 87)
+[node name="BoardSprite" type="Sprite2D" parent="."]
+modulate = Color(0.822503, 0.636275, 0.521429, 1)
+texture = ExtResource("2_k4dee")
+offset = Vector2(40, 40)
+
+[node name="Pieces" type="Node" parent="."]
+
+[node name="Piece1" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(8, 40)
+
+[node name="Piece2" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(8, 56)
+
+[node name="Piece3" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(8, 72)
+
+[node name="Piece4" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(24, 72)
+
+[node name="Piece5" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(40, 72)
+
+[node name="Piece6" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(56, 72)
+
+[node name="Piece7" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(72, 72)
+
+[node name="Piece8" parent="Pieces" instance=ExtResource("1_5c38k")]
+position = Vector2(72, 56)
+
+[node name="Piece9" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(72, 40)
+
+[node name="Piece10" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(72, 24)
+
+[node name="Piece11" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(72, 8)
+
+[node name="Piece12" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(56, 8)
+
+[node name="Piece13" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(40, 8)
+
+[node name="Piece14" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(24, 8)
+
+[node name="Piece15" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(8, 8)
+
+[node name="Piece16" parent="Pieces" instance=ExtResource("1_5c38k")]
+facing_white = false
+position = Vector2(8, 24)
