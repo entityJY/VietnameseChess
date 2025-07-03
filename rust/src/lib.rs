@@ -8,3 +8,6 @@ mod game_piece;
 
 #[gdextension]
 unsafe impl ExtensionLibrary for MyExtension {}
+
+
+// cargo +nightly build -Zbuild-std --target wasm32-unknown-emscripten --release
