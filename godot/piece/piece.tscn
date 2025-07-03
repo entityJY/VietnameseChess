@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://culgh4iqhhod5"]
+
+[ext_resource type="Texture2D" uid="uid://ddni0tfg2s0vg" path="res://piece/sprites/White Piece.png" id="1_6byuq"]
+[ext_resource type="Texture2D" uid="uid://dxmq5e0kfnjv3" path="res://piece/sprites/Black Piece.png" id="2_2eswf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6byuq"]
+size = Vector2(8, 8)
+
+[node name="Piece" type="Piece" node_paths=PackedStringArray("white_sprite", "black_sprite")]
+white_sprite = NodePath("WhiteSide")
+black_sprite = NodePath("BlackSide")
+texture_filter = 1
+
+[node name="WhiteSide" type="Sprite2D" parent="."]
+texture = ExtResource("1_6byuq")
+
+[node name="BlackSide" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_2eswf")
+
+[node name="Button" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button"]
+shape = SubResource("RectangleShape2D_6byuq")
+
+[connection signal="input_event" from="Button" to="." method="test"]
