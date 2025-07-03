@@ -7,63 +7,80 @@
 
 [node name="BoardSprite" type="Sprite2D" parent="."]
 modulate = Color(0.822503, 0.636275, 0.521429, 1)
+scale = Vector2(2, 2)
 texture = ExtResource("2_k4dee")
 offset = Vector2(40, 40)
 
-[node name="Pieces" type="Node" parent="."]
+[node name="Pieces" type="Node2D" parent="."]
 
 [node name="Piece1" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(8, 40)
+position = Vector2(15, 80)
+scale = Vector2(2, 2)
 
 [node name="Piece2" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(8, 56)
+position = Vector2(16, 112)
+scale = Vector2(2, 2)
 
 [node name="Piece3" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(8, 72)
+position = Vector2(16, 144)
+scale = Vector2(2, 2)
 
 [node name="Piece4" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(24, 72)
+position = Vector2(48, 144)
+scale = Vector2(2, 2)
 
 [node name="Piece5" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(40, 72)
+position = Vector2(80, 144)
+scale = Vector2(2, 2)
 
 [node name="Piece6" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(56, 72)
+position = Vector2(112, 144)
+scale = Vector2(2, 2)
 
 [node name="Piece7" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(72, 72)
+position = Vector2(144, 144)
+scale = Vector2(2, 2)
 
 [node name="Piece8" parent="Pieces" instance=ExtResource("1_5c38k")]
-position = Vector2(72, 56)
+position = Vector2(144, 112)
+scale = Vector2(2, 2)
 
 [node name="Piece9" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(72, 40)
+position = Vector2(144, 80)
+scale = Vector2(2, 2)
 
 [node name="Piece10" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(72, 24)
+position = Vector2(144, 48)
+scale = Vector2(2, 2)
 
 [node name="Piece11" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(72, 8)
+position = Vector2(144, 16)
+scale = Vector2(2, 2)
 
 [node name="Piece12" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(56, 8)
+position = Vector2(112, 16)
+scale = Vector2(2, 2)
 
 [node name="Piece13" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(40, 8)
+position = Vector2(80, 16)
+scale = Vector2(2, 2)
 
 [node name="Piece14" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(24, 8)
+position = Vector2(48, 16)
+scale = Vector2(2, 2)
 
 [node name="Piece15" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(8, 8)
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
 
 [node name="Piece16" parent="Pieces" instance=ExtResource("1_5c38k")]
 facing_white = false
-position = Vector2(8, 24)
+position = Vector2(16, 48)
+scale = Vector2(2, 2)
