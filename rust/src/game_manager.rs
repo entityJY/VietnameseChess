@@ -71,6 +71,7 @@ impl Manager {
             let areas = piece.bind().get_collisions();
 
             let mut placing_allowed = true;
+            if areas.len() == 0 {placing_allowed = false;}
             for i in 0..areas.len() {
                 match areas.get(i).unwrap().try_cast::<Piece>() {
                     Ok(_) => {placing_allowed = false;},
