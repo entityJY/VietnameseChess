@@ -1,80 +1,90 @@
-use godot::classes::InputEvent;
-use godot::classes::InputEventMouseMotion;
 use godot::obj::WithBaseField;
 use godot::prelude::*;
-use godot::classes::Node2D;
-use godot::classes::INode2D;
-use godot::classes::Node;
-use godot::classes::Sprite2D;
+use godot::classes::{Area2D, IArea2D, InputEvent, Sprite2D, ShapeCast2D};
+
+use crate::node::BoardNode;
 
 #[derive(GodotClass)]
-#[class(base=Node2D)]
-struct Piece {
+#[class(base=Area2D)]
+pub struct Piece {
 
     #[export]
     facing_white: bool,
-    following_mouse: bool,
 
     #[export]
     white_sprite: Option<Gd<Sprite2D>>,
     #[export]
     black_sprite: Option<Gd<Sprite2D>>,
 
-    previous_position: Vector2,
+    #[export]
+    shape_cast: Option<Gd<ShapeCast2D>>,
 
-    base: Base<Node2D>
+    position_id: i64,
+
+    base: Base<Area2D>
 }
 
 #[godot_api]
-impl INode2D for Piece {
+impl IArea2D for Piece {
 
-    fn init(base: Base<Node2D>) -> Self {
+    fn init(base: Base<Area2D>) -> Self {
         Self {
             facing_white: true,
-            following_mouse: false,
             white_sprite: None,
             black_sprite: None,
-            previous_position: Vector2::ZERO,
+            position_id: 0,
+            shape_cast: None,
             base
         }
     }
 
     fn ready(&mut self) {
-        self.previous_position = self.base().get_position();
         self.enable_white();
-        if !self.facing_white {self.enable_black();};
-    }
+        if !self.facing_white {self.enable_black();}
 
-    fn input(&mut self, event: Gd<InputEvent>) {
-        if self.following_mouse {
-            if let Ok(e) = event.clone().try_cast::<InputEventMouseMotion>() {
-                self.base_mut().set_position(e.get_position());
-            }
-        }
+        self.signals().input_event().connect_self(
+            |this, viewport, event, shape_idx| 
+            {this.on_click(viewport, event, shape_idx);}
+        );
+
+        self.base_mut().call_deferred("update_node_id", &[]);
     }
 }
 
 #[godot_api]
 pub impl Piece {
 
-    #[func]
-    pub fn click(&mut self, _: Gd<Node>, event: Gd<InputEvent>, _: i32) {
+    #[signal]
+    pub fn picked_up(piece: Gd<Piece>);
+
+    pub fn on_click(&mut self, _viewport: Gd<Node>, event: Gd<InputEvent>, _shape_idx: i64) {
         if event.is_action_pressed("LeftClick") {
-            self.following_mouse = !self.following_mouse;
-            if self.following_mouse {
-                self.previous_position = self.base().get_position();
-            }
-        } else if event.is_action_pressed("RightClick") && self.following_mouse {
-            self.following_mouse = false;
-            let pos = self.previous_position;
-            self.base_mut().set_position(pos);
-        } else if event.is_action_pressed("RightClick") && !self.following_mouse {
-            self.flip_piece();
+            let this_piece = &self.to_gd();
+            self.signals().picked_up().emit(this_piece);
         }
     }
 
-    pub fn flip_piece(&mut self) {
-        if self.facing_white { self.enable_black(); self.facing_white=false } else { self.enable_white(); self.facing_white=true }
+    pub fn is_white(&self) -> bool {
+        self.facing_white
+    }
+
+    pub fn get_position_id(&self) -> i64 {
+        self.position_id
+    }
+
+    #[func]
+    pub fn update_node_id(&mut self) {
+        self.position_id = self.shape_cast.as_ref().expect("No shape cast attached!").get_collider(0).expect("No object collision found").try_cast::<BoardNode>().expect("Object not board node!").bind().get_id();
+    }
+
+    pub fn get_collisions(&self) -> Array<Gd<Area2D>> {
+        let num = self.shape_cast.as_ref().expect("No shape cast attached!").get_collision_count();
+        let mut collider_array: Array<Gd<Area2D>> = Array::new();
+        for i in 0..num {
+            let x = self.shape_cast.as_ref().unwrap().get_collider(i).unwrap().try_cast::<Area2D>().expect("Object is not an Area2D");
+            collider_array.push(&x);
+        }
+        collider_array
     }
 
     fn enable_white(&mut self) {

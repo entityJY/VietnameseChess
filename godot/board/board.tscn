@@ -1,15 +1,118 @@
-[gd_scene load_steps=3 format=3 uid="uid://363xjpaqegg7"]
+[gd_scene load_steps=4 format=3 uid="uid://363xjpaqegg7"]
 
 [ext_resource type="PackedScene" uid="uid://culgh4iqhhod5" path="res://piece/piece.tscn" id="1_5c38k"]
 [ext_resource type="Texture2D" uid="uid://6nus34rkcqud" path="res://board/sprites/board.png" id="2_k4dee"]
+[ext_resource type="PackedScene" uid="uid://dw7nmriyw7wsh" path="res://board/node.tscn" id="3_vj8kq"]
 
-[node name="Base" type="Node2D"]
+[node name="Base" type="Manager"]
 
 [node name="BoardSprite" type="Sprite2D" parent="."]
 modulate = Color(0.822503, 0.636275, 0.521429, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("2_k4dee")
 offset = Vector2(40, 40)
+
+[node name="Nodes" type="Node2D" parent="."]
+
+[node name="BoardNode1" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 1
+position = Vector2(16, 16)
+
+[node name="BoardNode2" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 2
+position = Vector2(48, 16)
+
+[node name="BoardNode3" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 3
+position = Vector2(80, 16)
+
+[node name="BoardNode4" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 4
+position = Vector2(112, 16)
+
+[node name="BoardNode5" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 5
+position = Vector2(144, 16)
+
+[node name="BoardNode6" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 6
+position = Vector2(16, 48)
+
+[node name="BoardNode7" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 7
+position = Vector2(48, 48)
+
+[node name="BoardNode8" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 8
+position = Vector2(80, 48)
+
+[node name="BoardNode9" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 9
+position = Vector2(112, 48)
+
+[node name="BoardNode10" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 10
+position = Vector2(144, 48)
+
+[node name="BoardNode11" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 11
+position = Vector2(16, 80)
+
+[node name="BoardNode12" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 12
+position = Vector2(48, 80)
+
+[node name="BoardNode13" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 13
+position = Vector2(80, 80)
+
+[node name="BoardNode14" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 14
+position = Vector2(112, 80)
+
+[node name="BoardNode15" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 15
+position = Vector2(144, 80)
+
+[node name="BoardNode16" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 16
+position = Vector2(16, 112)
+
+[node name="BoardNode17" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 17
+position = Vector2(48, 112)
+
+[node name="BoardNode18" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 18
+position = Vector2(80, 112)
+
+[node name="BoardNode19" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 19
+position = Vector2(112, 112)
+
+[node name="BoardNode20" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 20
+position = Vector2(145, 112)
+
+[node name="BoardNode21" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 21
+position = Vector2(16, 144)
+
+[node name="BoardNode22" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 22
+position = Vector2(48, 144)
+
+[node name="BoardNode23" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 23
+position = Vector2(80, 144)
+
+[node name="BoardNode24" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 24
+position = Vector2(112, 144)
+
+[node name="BoardNode25" parent="Nodes" instance=ExtResource("3_vj8kq")]
+id = 25
+position = Vector2(144, 144)
 
 [node name="Pieces" type="Node2D" parent="."]
 
