@@ -64,8 +64,8 @@ impl Manager {
         if self.held_piece.is_none() {
             if (self.is_white_turn && piece.bind().is_white()) || (!self.is_white_turn && !piece.bind().is_white()) {
                 self.previous_node_id = piece.bind().get_position_id();
+                piece.bind_mut().base_mut().set_z_index(2);
                 self.held_piece = Some(piece);
-                self.held_piece.as_mut().unwrap().set_z_index(2);
             }
         } else {
             let areas = piece.bind().get_collisions();
@@ -79,9 +79,10 @@ impl Manager {
                 }
             }
             if placing_allowed == true {
-                self.held_piece = None;
                 piece.bind_mut().update_node_id();
-                self.held_piece.as_mut().unwrap().set_z_index(1);
+                piece.bind_mut().base_mut().set_z_index(1);
+                self.is_white_turn = !self.is_white_turn;
+                self.held_piece = None;
             }
         }
     }
