@@ -11,6 +11,8 @@ pub struct Manager {
     held_piece: Option<Gd<Piece>>,
     previous_node_id: i64,
     is_white_turn: bool,
+    #[export]
+    allow_placing_back: bool,
     base: Base<Node2D>
 }
 
@@ -22,6 +24,7 @@ impl INode2D for Manager {
             held_piece: None,
             is_white_turn: true,
             previous_node_id: 0,
+            allow_placing_back: false,
             base
         }
     }
@@ -79,10 +82,13 @@ impl Manager {
                 }
             }
             if placing_allowed == true {
-                piece.bind_mut().update_node_id();
-                piece.bind_mut().base_mut().set_z_index(1);
-                if self.previous_node_id != piece.bind().get_hover_id() {self.is_white_turn = !self.is_white_turn;}
-                self.held_piece = None;
+                let no_move = self.previous_node_id == piece.bind().get_hover_id();
+                if self.allow_placing_back || !no_move {
+                    if !no_move { self.is_white_turn = !self.is_white_turn; }
+                    piece.bind_mut().update_node_id();
+                    piece.bind_mut().base_mut().set_z_index(1);
+                    self.held_piece = None;
+                }
             }
         }
     }
