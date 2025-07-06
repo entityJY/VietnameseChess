@@ -81,7 +81,7 @@ impl Manager {
             if placing_allowed == true {
                 piece.bind_mut().update_node_id();
                 piece.bind_mut().base_mut().set_z_index(1);
-                self.is_white_turn = !self.is_white_turn;
+                if self.previous_node_id != piece.bind().get_hover_id() {self.is_white_turn = !self.is_white_turn;}
                 self.held_piece = None;
             }
         }

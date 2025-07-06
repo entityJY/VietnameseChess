@@ -20,6 +20,7 @@ pub struct Piece {
     shape_cast: Option<Gd<ShapeCast2D>>,
 
     position_id: i64,
+    hover_id: i64,
 
     base: Base<Area2D>
 }
@@ -33,6 +34,7 @@ impl IArea2D for Piece {
             white_sprite: None,
             black_sprite: None,
             position_id: 0,
+            hover_id: 0,
             shape_cast: None,
             base
         }
@@ -45,6 +47,10 @@ impl IArea2D for Piece {
         self.signals().input_event().connect_self(
             |this, viewport, event, shape_idx| 
             {this.on_click(viewport, event, shape_idx);}
+        );
+        self.signals().area_entered().connect_self(
+            |this, area|
+            {this.hover_over_node(area);}
         );
 
         self.base_mut().call_deferred("update_node_id", &[]);
@@ -64,6 +70,17 @@ pub impl Piece {
         }
     }
 
+    fn hover_over_node(&mut self, area: Gd<Area2D>) {
+        match area.try_cast::<BoardNode>() {
+            Ok(node) => {self.hover_id = node.bind().get_id()},
+            Err(_) => {}
+        }
+    }
+
+    pub fn get_hover_id(&self) -> i64 {
+        self.hover_id
+    }
+
     pub fn is_white(&self) -> bool {
         self.facing_white
     }
@@ -75,6 +92,7 @@ pub impl Piece {
     #[func]
     pub fn update_node_id(&mut self) {
         self.position_id = self.shape_cast.as_ref().expect("No shape cast attached!").get_collider(0).expect("No object collision found").try_cast::<BoardNode>().expect("Object not board node!").bind().get_id();
+        self.hover_id = self.position_id;
     }
 
     pub fn get_collisions(&self) -> Array<Gd<Area2D>> {
